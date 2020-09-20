@@ -36,10 +36,10 @@ public:
     ~CircleMenuInterface();
 
     ///добавление кнопки (лепестка)
-    bool addButton(QString name, QIcon icon);
+    bool addPetalButton(QString name, QIcon icon);
     ///удалить кнопку
-    void deleteButton(int id);
-    void deleteButton(QString name);
+    void deletePetalButton(int id);
+    void deletePetalButton(QString name);
     ///добавить группу (раскрывающийся лепесток)
     bool addGroup(QString name, QIcon icon);
     ///удалить группу
@@ -47,6 +47,8 @@ public:
     void deleteGroup(QString name);
     ///добавить центральную кнопку
     bool addCentralButton(QString name, QIcon icon);
+    ///удлить центральную кнопку
+    void deleteCentralButton();
     ///получить количество кнопок (вместе с группами)
     int getButtonsCount();
     /// задать размер меню
@@ -63,9 +65,9 @@ public:
 
 protected:
     void updateMenu();
-    void setMenuGeometry(QWidget *button);
-    void setCentralButtonMask(QWidget *button);
-    void setPetalButtonMask(QWidget *button);
+    void setMenuGeometry(PetalButton *button);
+    void setCentralButtonMask(PetalButton *button);
+    void setPetalButtonMask(PetalButton *button);
 
 };
 
