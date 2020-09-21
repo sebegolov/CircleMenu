@@ -21,16 +21,18 @@ private:
 
     /// Количество кнопок (лепестков)
     int m_buttonsCount = 0;
-    /// Размер меню
+    /// Размер меню (диаметр)
     int m_sizeMenu = 200;
-    /// Размер центральной кнопки
+    /// Размер центральной кнопки (диаметр)
     int m_sizeCentralButton = 50;
     /// Видимость центральной кнопки
     bool m_showCentralButton = true;
     /// Размер отступов
     int m_sizeIndents = 10;
     ///цвет меню
-    QColor m_colorMenu = Qt::gray;
+    QColor m_colorMenu = Qt::green;
+    ///угол симметрии перввой кнопки
+    double m_angelSimmetry = 90;            //Pi/2
 public:
     CircleMenuInterface(QWidget * mainWindow);
     ~CircleMenuInterface();
@@ -65,6 +67,7 @@ public:
 
 protected:
     void updateMenu();
+    void deineArea();
     void setMenuGeometry(PetalButton *button);
     void setCentralButtonMask(PetalButton *button);
     void setPetalButtonMask(PetalButton *button);

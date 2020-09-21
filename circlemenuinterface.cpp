@@ -76,6 +76,38 @@ void CircleMenuInterface::deleteCentralButton()
     }
 }
 
+void CircleMenuInterface::setSizeMenu(int sizeMenu)
+{
+    if(sizeMenu <= m_sizeCentralButton)
+    {
+        qDebug("The size of the menu is smaller than the center button");
+        return;
+    }
+
+    m_sizeMenu = sizeMenu;
+}
+
+void CircleMenuInterface::setSizeCentralButton(int sizeCentralButton)
+{
+    if(sizeCentralButton >= m_sizeMenu/2)
+    {
+        qDebug("Center button size larger than menu size / 2");
+        return;
+    }
+
+    m_sizeCentralButton = sizeCentralButton;
+}
+
+void CircleMenuInterface::setSizeIndents(int sizeIndents)
+{
+    if(sizeIndents >= (m_sizeMenu - m_sizeCentralButton)/4)
+    {
+        qDebug("Too large indents");
+    }
+
+    m_sizeIndents = sizeIndents;
+}
+
 void CircleMenuInterface::showCircleMenu(bool show)
 {
 
@@ -89,6 +121,24 @@ void CircleMenuInterface::updateMenu()
     {
         setMenuGeometry(petal);
     }
+}
+
+void CircleMenuInterface::deineArea()
+{
+    if(m_buttonsCount == 0)
+        return;
+
+    double center = m_sizeMenu/2;      //центр меню
+    double radiusCenterHole = m_sizeCentralButton/2 + m_sizeIndents;
+    QRegion centerHole,                 //центральный вырез
+            mainCircle,                 //основной круг, для формирования кнопок
+            petal;                      //форма лепестка
+    mainCircle = QRegion(0, 0, m_sizeMenu, m_sizeMenu);
+    centerHole = QRegion(center-radiusCenterHole, center-radiusCenterHole, center+radiusCenterHole, center+radiusCenterHole);
+
+    petal = mainCircle.subtracted(centerHole);
+
+
 }
 
 void CircleMenuInterface::setMenuGeometry(PetalButton * button)
